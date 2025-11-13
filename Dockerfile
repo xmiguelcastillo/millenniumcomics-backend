@@ -1,16 +1,16 @@
+# Use Java 21 runtime (matches your pom.xml)
 FROM eclipse-temurin:21-jdk-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy everything into the container
+# Copy everything
 COPY . .
 
 # Make Maven wrapper executable
 RUN chmod +x mvnw
 
-# Build the Spring Boot app
+# Build jar
 RUN ./mvnw -Dmaven.test.skip=true package
 
-# Run the actual JAR file
+# Run jar
 CMD ["java", "-jar", "target/MillenniumComics-0.0.1-SNAPSHOT.jar"]
